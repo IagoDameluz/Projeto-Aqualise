@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · AquaBot{% endblock %}
+{% block conteudo %}
+
+<div class="chat-hero">
+  <div class="chat-hero-icone">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C12 2 4 12 4 17.5C4 21.6 7.6 25 12 25C16.4 25 20 21.6 20 17.5C20 12 12 2 12 2Z" fill="currentColor"/>
+    </svg>
+  </div>
+  <div>
+    <h1>AquaBot</h1>
+    <p>Assistente especializado em economia de água e meio ambiente, com respostas calculadas em cima do seu consumo registrado.</p>
+  </div>
+</div>
+
+<div class="card">
+  <p style="margin:0 0 12px; font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.04em;">Perguntas frequentes</p>
+  <div class="faq-grade">
+    {% for pergunta in perguntas_frequentes %}
+    <button type="button" class="faq-botao" data-pergunta="{{ pergunta }}">{{ pergunta }}</button>
+    {% endfor %}
+  </div>
+
+  <div id="chat-janela" class="chat-janela">
+    <div class="bolha bot">Oi! Eu sou o AquaBot 💧. Posso te ajudar com dicas de economia de água e meio ambiente — pode usar os botões acima ou escrever sua pergunta.</div>
+  </div>
+  <form id="chat-form" class="chat-form">
+    <input type="text" id="chat-input" placeholder="Pergunte algo sobre economia de água..." autocomplete="off" required>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<script>
+const janela = document.getElementById('chat-janela');
+const form = document.getElementById('chat-form');
+const input = document.getElementById('chat-input');
+const botoesFaq = document.querySelectorAll('.faq-botao');
+
+function adicionarBolha(texto, autor) {
+  const bolha = document.createElement('div');
+  bolha.className = 'bolha ' + autor;
+  bolha.textContent = texto;
+  janela.appendChild(bolha);
+  janela.scrollTop = janela.scrollHeight;
+  return bolha;
+}
+
+async function enviarMensagem(mensagem) {
+  adicionarBolha(mensagem, 'usuario');
+  input.disabled = true;
+  const bolhaEspera = adicionarBolha('Digitando...', 'bot');
+
+  try {
+    const resposta = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mensagem })
+    });
+    const dados = await resposta.json();
+    if (dados.erro) {
+      bolhaEspera.textContent = 'Erro: ' + dados.erro;
+    } else {
+      bolhaEspera.textContent = dados.resposta;
+    }
+  } catch (err) {
+    bolhaEspera.textContent = 'Não foi possível falar com o assistente agora.';
+  } finally {
+    input.disabled = false;
+    input.focus();
+  }
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const mensagem = input.value.trim();
+  if (!mensagem) return;
+  input.value = '';
+  enviarMensagem(mensagem);
+});
+
+botoesFaq.forEach((botao) => {
+  botao.addEventListener('click', () => {
+    enviarMensagem(botao.dataset.pergunta);
+  });
+});
+</script>
+{% endblock %}

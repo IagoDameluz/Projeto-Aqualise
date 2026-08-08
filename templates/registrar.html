@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Registrar{% endblock %}
+{% block conteudo %}
+<h1>Registrar consumo</h1>
+<p class="subtitulo">Informe o mes, o consumo em m3 e o valor da conta.</p>
+
+{% if resultado %}
+<div class="mensagem {{ 'ok' if resultado.ok else 'erro' }}">{{ resultado.mensagem }}</div>
+{% endif %}
+
+<div class="card">
+  <form method="POST">
+    <label for="mes">Mes</label>
+    <select id="mes" name="mes" required>
+      <option value="" disabled selected>Selecione o mes</option>
+      {% for m in meses %}
+      <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="consumo">Consumo (m3)</label>
+    <input type="number" step="0.01" min="0" id="consumo" name="consumo" placeholder="Ex: 12.5" required>
+
+    <label for="custo">Valor da conta (R$)</label>
+    <input type="number" step="0.01" min="0" id="custo" name="custo" placeholder="Ex: 89.90" required>
+
+    <button type="submit">Salvar registro</button>
+  </form>
+</div>
+{% endblock %}

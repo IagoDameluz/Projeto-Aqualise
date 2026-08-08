@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Início{% endblock %}
+{% block conteudo %}
+
+<section class="hero">
+  <span class="tag">Projeto acadêmico · CIC UnB</span>
+  <h1>Cuide da água que <em>sobra</em> antes que <em>falte</em>.</h1>
+  <p>O AquaLise ajuda você a acompanhar seu consumo mensal de água, comparar com a média
+     brasileira e descobrir, com a ajuda de um assistente de IA, onde exatamente dá para
+     economizar — sem complicação.</p>
+  <div class="hero-botoes">
+    <a href="{{ url_for('painel') }}" class="botao">Acessar o painel</a>
+    <a href="{{ url_for('assistente') }}" class="botao botao-fantasma">Falar com o AquaBot</a>
+  </div>
+</section>
+
+<section class="secao">
+  <h2 class="secao-titulo">Por que economizar água importa</h2>
+  <p class="secao-sub">A água tratada que chega até a torneira passa por captação, tratamento
+     e distribuição — um processo caro e que consome energia. Usar mais do que o necessário
+     pressiona esse sistema inteiro, especialmente em períodos de estiagem.</p>
+  <div class="grade-3">
+    <div class="bloco-icone">
+      <div class="destaque-numero">5,8 m³</div>
+      <p>É a média de consumo mensal por pessoa no Brasil, segundo o SNIS 2023 — a referência
+         que o AquaLise usa para comparar o seu consumo.</p>
+    </div>
+    <div class="bloco-icone">
+      <h3>Vazamentos silenciosos</h3>
+      <p>Uma torneira pingando ou um vazamento não visível pode representar uma parte
+         significativa da conta sem que você perceba no dia a dia.</p>
+    </div>
+    <div class="bloco-icone">
+      <h3>Impacto no bolso e no ambiente</h3>
+      <p>Reduzir o consumo não economiza só dinheiro: alivia a pressão sobre mananciais e
+         reduz o gasto de energia usado para tratar e bombear água.</p>
+    </div>
+  </div>
+</section>
+
+<section class="secao">
+  <h2 class="secao-titulo">O propósito do AquaLise</h2>
+  <p class="secao-sub">
+    Este sistema nasceu como projeto da disciplina de Algoritmos e Programação de Computadores
+    do CIC/UnB, com um objetivo simples: tornar visível algo que normalmente só aparece, de forma
+    vaga, no boleto da conta de água todo mês. Ao registrar seu consumo, você passa a enxergar
+    padrões, comparar sua realidade com a média nacional e receber orientação prática — não
+    genérica — para reduzir o desperdício.
+  </p>
+</section>
+
+<section class="secao">
+  <h2 class="secao-titulo">Como funciona</h2>
+  <p class="secao-sub">Quatro passos simples, sem cadastro complicado.</p>
+  <div class="grade-3">
+    <div class="bloco-icone">
+      <div class="numero-passo">01</div>
+      <h3>Registre o mês</h3>
+      <p>Informe o consumo em m³ e o valor da conta de cada mês.</p>
+    </div>
+    <div class="bloco-icone">
+      <div class="numero-passo">02</div>
+      <h3>Compare com a média</h3>
+      <p>Veja se você está acima ou abaixo da média brasileira, ajustada ao número de moradores.</p>
+    </div>
+    <div class="bloco-icone">
+      <div class="numero-passo">03</div>
+      <h3>Converse com o AquaBot</h3>
+      <p>Receba dicas personalizadas, calculadas em cima do seu consumo real.</p>
+    </div>
+    <div class="bloco-icone">
+      <div class="numero-passo">04</div>
+      <h3>Acompanhe o relatório</h3>
+      <p>Veja seu melhor e pior mês, totais e a evolução ao longo do tempo.</p>
+    </div>
+  </div>
+</section>
+
+<div class="hero-botoes">
+  <a href="{{ url_for('painel') }}" class="botao">Começar agora</a>
+</div>
+
+{% endblock %}

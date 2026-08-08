@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Painel{% endblock %}
+{% block conteudo %}
+<h1>{{ saudacao_completa }}</h1>
+<p class="subtitulo">Acompanhe seu consumo de agua, compare com a media brasileira e descubra onde economizar.</p>
+
+{% if total_meses == 0 %}
+<div class="card">
+  <p style="margin:0 0 14px;">Voce ainda nao registrou nenhum mes. Comece registrando o consumo do mes atual para liberar historico, comparacoes e relatorios.</p>
+  <a href="{{ url_for('registrar') }}" class="botao">Registrar primeiro mes</a>
+</div>
+{% endif %}
+
+<div class="grade-atalhos">
+  <a class="atalho" href="{{ url_for('registrar') }}">
+    <div class="rotulo">Registrar consumo</div>
+    <div class="desc">Adicione o consumo em m3 e o valor da conta do mes.</div>
+  </a>
+  <a class="atalho" href="{{ url_for('historico') }}">
+    <div class="rotulo">Historico</div>
+    <div class="desc">Veja todos os meses registrados e os totais.</div>
+  </a>
+  <a class="atalho" href="{{ url_for('comparar') }}">
+    <div class="rotulo">Comparar com a media</div>
+    <div class="desc">Descubra se voce consome acima ou abaixo da media do Brasil.</div>
+  </a>
+  <a class="atalho" href="{{ url_for('economia') }}">
+    <div class="rotulo">Calcular economia</div>
+    <div class="desc">Simule quanto voce economizaria reduzindo o consumo.</div>
+  </a>
+  <a class="atalho" href="{{ url_for('relatorio') }}">
+    <div class="rotulo">Relatorio</div>
+    <div class="desc">Resumo completo: melhor mes, pior mes e totais.</div>
+  </a>
+  <a class="atalho" href="{{ url_for('assistente') }}">
+    <div class="rotulo">AquaBot</div>
+    <div class="desc">Converse com o assistente e receba dicas personalizadas.</div>
+  </a>
+</div>
+{% endblock %}

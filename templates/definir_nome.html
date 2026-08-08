@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaLise</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background: var(--bg); min-height:100vh; display:flex; align-items:center; justify-content:center;">
+  <div class="card" style="max-width:380px; width:100%;">
+    <svg width="24" height="32" viewBox="0 0 24 32" fill="none" style="color: var(--cyan); margin-bottom:12px; filter: drop-shadow(0 0 6px rgba(33,240,255,0.6));">
+      <path d="M12 0C12 0 2 14 2 21C2 26.5 6.5 31 12 31C17.5 31 22 26.5 22 21C22 14 12 0 12 0Z" fill="currentColor"/>
+    </svg>
+    <h1 style="font-size:1.6rem;">Bem-vindo ao AquaLise</h1>
+    <p class="subtitulo">Como podemos te chamar?</p>
+    <form method="POST">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" name="nome" placeholder="Ex: Marina" required autofocus>
+      <button type="submit">Começar</button>
+    </form>
+  </div>
+</body>
+</html>

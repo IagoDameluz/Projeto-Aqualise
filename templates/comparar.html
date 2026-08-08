@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Comparar{% endblock %}
+{% block conteudo %}
+<h1>Comparar com a media brasileira</h1>
+<p class="subtitulo">A media de referencia e {{ 5.8 }} m3 por pessoa, por mes (SNIS 2023).</p>
+
+{% if erro %}<div class="mensagem erro">{{ erro }}</div>{% endif %}
+
+<div class="card">
+  <form method="POST">
+    <label for="pessoas">Quantas pessoas moram na casa?</label>
+    <input type="number" min="1" step="1" id="pessoas" name="pessoas" value="{{ resultado.pessoas if resultado else 1 }}" required>
+    <button type="submit">Comparar</button>
+  </form>
+</div>
+
+{% if resultado %}
+{% set pct = resultado.percentual %}
+{% set pct_visual = pct if pct < 140 else 140 %}
+{% set fill_y = 32 - (32 * pct_visual / 140) %}
+<div class="card">
+  <div class="gauge-wrap">
+    <svg width="72" height="96" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="dropClip">
+          <path d="M12 0C12 0 2 14 2 21C2 26.5 6.5 31 12 31C17.5 31 22 26.5 22 21C22 14 12 0 12 0Z"/>
+        </clipPath>
+      </defs>
+      <path d="M12 0C12 0 2 14 2 21C2 26.5 6.5 31 12 31C17.5 31 22 26.5 22 21C22 14 12 0 12 0Z"
+            fill="none" stroke="#26333d" stroke-width="1"/>
+      <rect x="0" y="{{ fill_y }}" width="24" height="{{ 32 - fill_y }}"
+            fill="{{ '#ff6b5b' if resultado.situacao == 'acima' else '#21f0ff' }}"
+            clip-path="url(#dropClip)"/>
+    </svg>
+    <div class="gauge-legenda">
+      Seu consumo esta em <span class="destaque">{{ pct }}%</span> da media brasileira para {{ resultado.pessoas }} pessoa(s).
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="valor">{{ resultado.media_casa }} m3</div><div class="rotulo">Sua media mensal</div></div>
+    <div class="stat"><div class="valor">{{ resultado.media_br }} m3</div><div class="rotulo">Media BR ({{ resultado.pessoas }} pessoa(s))</div></div>
+  </div>
+
+  {% if resultado.situacao == "acima" %}
+  <div class="mensagem erro">Voce consome {{ resultado.diferenca }}% acima da media.</div>
+  {% elif resultado.situacao == "abaixo" %}
+  <div class="mensagem ok">Parabens! Voce consome {{ resultado.diferenca }}% abaixo da media.</div>
+  {% else %}
+  <div class="mensagem ok">Seu consumo e igual a media brasileira.</div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Historico{% endblock %}
+{% block conteudo %}
+<h1>Historico</h1>
+<p class="subtitulo">Todos os meses registrados ate agora.</p>
+
+{% if not dados %}
+<div class="card">Nenhum dado registrado ainda. <a href="{{ url_for('registrar') }}">Registrar o primeiro mes</a>.</div>
+{% else %}
+<div class="stats">
+  <div class="stat"><div class="valor">{{ dados.total_consumo }} m3</div><div class="rotulo">Total consumido</div></div>
+  <div class="stat"><div class="valor">R$ {{ dados.total_custo }}</div><div class="rotulo">Total gasto</div></div>
+  <div class="stat"><div class="valor">{{ dados.media }} m3</div><div class="rotulo">Media mensal</div></div>
+</div>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Mes</th><th>Consumo</th><th>Custo</th><th>R$/m3</th></tr></thead>
+    <tbody>
+      {% for r in dados.linhas %}
+      <tr>
+        <td>{{ r.mes }}</td>
+        <td class="numero">{{ r.consumo }} m3</td>
+        <td class="numero">R$ {{ r.custo }}</td>
+        <td class="numero">R$ {{ r.preco_m3 }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

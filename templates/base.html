@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block titulo %}AquaLise{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a href="{{ url_for('inicio') }}" class="brand">
+      <svg class="brand-drop" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C12 0 2 14 2 21C2 26.5 6.5 31 12 31C17.5 31 22 26.5 22 21C22 14 12 0 12 0Z" fill="currentColor"/>
+      </svg>
+      <span>Aqua<em>Lise</em></span>
+    </a>
+
+    {% if nome_usuario %}
+    <p class="saudacao">{{ saudacao_completa }}</p>
+    {% endif %}
+
+    <nav>
+      <a href="{{ url_for('inicio') }}" class="{{ 'ativo' if request.path == url_for('inicio') }}">Início</a>
+      <a href="{{ url_for('painel') }}" class="{{ 'ativo' if request.path == url_for('painel') }}">Painel</a>
+      <a href="{{ url_for('registrar') }}" class="{{ 'ativo' if request.path == url_for('registrar') }}">Registrar consumo</a>
+      <a href="{{ url_for('historico') }}" class="{{ 'ativo' if request.path == url_for('historico') }}">Histórico</a>
+      <a href="{{ url_for('comparar') }}" class="{{ 'ativo' if request.path == url_for('comparar') }}">Comparar com a média</a>
+      <a href="{{ url_for('economia') }}" class="{{ 'ativo' if request.path == url_for('economia') }}">Calcular economia</a>
+      <a href="{{ url_for('relatorio') }}" class="{{ 'ativo' if request.path == url_for('relatorio') }}">Relatório</a>
+      <a href="{{ url_for('assistente') }}" class="nav-assistente {{ 'ativo' if request.path == url_for('assistente') }}">AquaBot &middot; assistente IA</a>
+    </nav>
+
+    <div class="sidebar-rodape">
+      <a href="{{ url_for('desenvolvedores') }}" class="{{ 'ativo' if request.path == url_for('desenvolvedores') }}">Desenvolvedores</a>
+      <span class="creditos">CIC · UnB<br>Algoritmos e Programação de Computadores</span>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    {% block conteudo %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>

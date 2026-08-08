@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Desenvolvedores{% endblock %}
+{% block conteudo %}
+<h1>Desenvolvedores</h1>
+<p class="subtitulo">
+  Projeto desenvolvido para a disciplina de <strong>Algoritmos e Programação de Computadores</strong>,
+  do <strong>Departamento de Ciência da Computação (CIC)</strong> da
+  <strong>Universidade de Brasília (UnB)</strong>.
+</p>
+
+<p class="rotulo-secao">Desenvolvedores do sistema</p>
+
+<div class="grade-devs">
+  <div class="dev-card">
+    <div class="dev-avatar">P</div>
+    <div>
+      <div class="dev-nome">Paulo Vítor</div>
+      <div class="dev-info">261048650 · Ciência da Computação</div>
+    </div>
+  </div>
+  <div class="dev-card">
+    <div class="dev-avatar">I</div>
+    <div>
+      <div class="dev-nome">Iago Dameluz</div>
+      <div class="dev-info">261017117 · Ciência da Computação</div>
+    </div>
+  </div>
+  <div class="dev-card">
+    <div class="dev-avatar">M</div>
+    <div>
+      <div class="dev-nome">Marcos Paulo</div>
+      <div class="dev-info">261021521 · Ciência da Computação</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:24px;">
+  <h3 style="margin-top:0; font-family: var(--display); color: var(--text);">Sobre o projeto</h3>
+  <p style="color: var(--text-dim); font-size: 0.92rem; margin-bottom:0;">
+    O sistema AquaLise foi desenvolvido na linguagem Python, incorporando os conceitos abordados durante a disciplina.
+     A interface web foi elaborada com o auxílio da inteligência artificial Claude e integrada ao framework Flask.
+      O módulo AquaBot, por sua vez, utiliza a API do Gemini, da Google, para gerar recomendações personalizadas 
+      de economia de água a partir das informações registradas pelos usuários.
+  </p>
+</div>
+{% endblock %}

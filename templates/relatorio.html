@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}AquaLise · Relatorio{% endblock %}
+{% block conteudo %}
+<h1>Relatorio</h1>
+<p class="subtitulo">Resumo completo do periodo registrado.</p>
+
+{% if not dados %}
+<div class="card">Nenhum dado registrado ainda. <a href="{{ url_for('registrar') }}">Registrar o primeiro mes</a>.</div>
+{% else %}
+<div class="card">
+  <p style="margin-top:0;">Periodo: <strong>{{ dados.periodo_inicio }}</strong> ate <strong>{{ dados.periodo_fim }}</strong></p>
+  <div class="stats">
+    <div class="stat"><div class="valor">{{ dados.total_consumo }} m3</div><div class="rotulo">Total consumido</div></div>
+    <div class="stat"><div class="valor">R$ {{ dados.total_custo }}</div><div class="rotulo">Total gasto</div></div>
+    <div class="stat"><div class="valor">{{ dados.media_consumo }} m3</div><div class="rotulo">Media mensal</div></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="valor">{{ dados.melhor_mes }}</div><div class="rotulo">Melhor mes ({{ dados.melhor_consumo }} m3)</div></div>
+    <div class="stat"><div class="valor">{{ dados.pior_mes }}</div><div class="rotulo">Pior mes ({{ dados.pior_consumo }} m3)</div></div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
